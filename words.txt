@@ -1,8 +1,0 @@
-banana
-apple
-apple
-banana
-orange
-orange
-banana
-banana

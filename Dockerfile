@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Getty Images "https://github.com/gettyimages"
+MAINTAINER Gibran Otazo "gibran@entropy.tech"
 
 RUN apt-get update \
  && apt-get install -y locales \
@@ -18,7 +18,8 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update \
  && apt-get install -y curl unzip \
-    python3 python3-setuptools \
+    python3 python3-setuptools libssl-dev libcurl4-openssl-dev \
+    libxml2-dev libxslt-dev r-base r-base-dev \
  && ln -s /usr/bin/python3 /usr/bin/python \
  && easy_install3 pip py4j \
  && apt-get clean \
@@ -71,3 +72,32 @@ RUN curl -sL --retry 3 \
 
 WORKDIR $SPARK_HOME
 CMD ["bin/spark-class", "org.apache.spark.deploy.master.Master"]
+
+RUN apt-get update \
+ && apt-get install -y git nano apt-transport-https
+
+RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+RUN apt-get update
+RUN apt-get install sbt
+
+RUN git clone https://github.com/datastax/spark-cassandra-connector.git
+RUN cd spark-cassandra-connector
+RUN git checkout v2.0.1
+RUN sbt/sbt assembly
+RUN cp spark-cassandra-connector/target/full/scala-2.10/spark-cassandra-connector-assembly-2.0.1.jar ~
+
+ADD . /apps/MyApp
+WORKDIR /apps/MyApp
+
+
+
+
+
+
+
+
+
+
+
+

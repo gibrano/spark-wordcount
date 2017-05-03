@@ -82,13 +82,9 @@ RUN apt-get update
 RUN apt-get install sbt
 
 RUN git clone https://github.com/datastax/spark-cassandra-connector.git
-RUN cd spark-cassandra-connector
-RUN git checkout v2.0.1
-RUN sbt/sbt assembly
-RUN cp spark-cassandra-connector/target/full/scala-2.10/spark-cassandra-connector-assembly-2.0.1.jar ~
+RUN cd spark-cassandra-connector && git checkout v2.0.1 && sbt/sbt assembly
 
-ADD . /apps/MyApp
-WORKDIR /apps/MyApp
+ADD apps /usr/spark-2.1.0
 
 
 

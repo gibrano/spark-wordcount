@@ -9,9 +9,11 @@ git clone https://github.com/gibrano/docker-spark.git
 `
 
 Then build 
+
 `
 sudo docker build -t entropyx/docker-spark:v1.0.0 .
 `
+
 To create standalone cluster 
 
 `
@@ -23,6 +25,7 @@ Create the numbers of node that you want
 `
 docker-compose scale worker=3
 `
+
 You can see the process with 
 
 `

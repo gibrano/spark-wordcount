@@ -5,5 +5,5 @@
 First you need, is clone the repository with 
 
 `
-git clone 
+git clone https://github.com/gibrano/docker-spark.git 
 `

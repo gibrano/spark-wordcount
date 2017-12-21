@@ -3,7 +3,7 @@ FROM gettyimages/spark:2.2.0-hadoop-2.7
 MAINTAINER Gibran Otazo "gibran@entropy.tech"
 
 ADD java-8-debian.list /etc/apt/sources.list.d/.
-RUN apt-key adv --keyserver keyserver.ubuntu.com:80 --recv-keys EEA14886
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
   &&   apt-get update && apt-get install -y oracle-java8-installer oracle-java8-set-default \
   &&   rm -rf /var/cache/oracle-jdk8-installer
